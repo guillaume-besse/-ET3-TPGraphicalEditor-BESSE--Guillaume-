@@ -51,6 +51,8 @@ public class Controller {
 	@FXML
 	private Pane dessin;
 	
+	
+	// ces trois listes sont utilisées dans les eventHandler pour stocker les coordonnées et les formes
 	private java.util.ArrayList<Double> listeX;
 	private java.util.ArrayList<Double> listeY;
 	private java.util.ArrayList<Rectangle> listeRect;
@@ -58,6 +60,7 @@ public class Controller {
 	
 	
 	@FXML
+	// on met à jour le modèle à chaque click sur un radioButton
 	private void clickOnSelect(ActionEvent event)
 	{
 	    model.setSelect(true);
@@ -91,7 +94,7 @@ public class Controller {
 	
 	
 	private void clickPane(MouseEvent event) {
-		
+		// fonction qui trace un rectangle en fonction des clicks de la souris 
 		
 		if (model.getRectangle()==true) {
 			
@@ -118,9 +121,10 @@ public class Controller {
 				rec.addEventHandler(MouseEvent.MOUSE_DRAGGED , new EventHandler<MouseEvent>(){
 					
 					public void handle(MouseEvent event) {
-						((Rectangle)event.getTarget()).setX(event.getX());
-						((Rectangle)event.getTarget()).setY(event.getY());
-						
+						if(model.getSelect()==true) {
+							((Rectangle)event.getTarget()).setX(event.getX());
+							((Rectangle)event.getTarget()).setY(event.getY());
+						}
 					}
 				});
 				
@@ -158,6 +162,12 @@ public class Controller {
 	}
 	
 	
+	
+	private void clickDelete(ActionEvent event) {
+		dessin.getChildren().remove(dessin.getChildren().size()-1);
+	}
+	
+	
 	private void changeCouleur(ActionEvent event) {
 		model.setColor(couleur.getValue());
 	}
@@ -184,6 +194,8 @@ public class Controller {
 		dessin.setOnMouseDragged(this::finClick);
 		
 		
+		
+		delete.setOnAction(this::clickDelete);
 		
 		
 		

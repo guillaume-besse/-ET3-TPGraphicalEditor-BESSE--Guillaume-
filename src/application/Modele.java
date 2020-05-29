@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 
 public class Modele {
 
-	// attribut forme ou action select
+	// les boolean prcisent si oui ou non les radioButton sont séléctionnés
 	private boolean select;
 	private boolean elipse;
 	private boolean rectangle;
